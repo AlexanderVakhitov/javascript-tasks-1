@@ -90,7 +90,8 @@ var serviceSymbols = [
     ]
 ];
 
-if (string = fromArabicToRoman(hours, minutes))
+string = fromArabicToRoman(hours, minutes);
+if (string)
 {
     console.log("Ваше время:\n\r");
     console.log(string);
@@ -102,7 +103,6 @@ else
 
 function fromArabicToRoman(hours, minutes)
 {
-    var tmpString = "";
     hours = parseInt(hours, 10);
     minutes = parseInt(minutes, 10);
 
@@ -110,13 +110,13 @@ function fromArabicToRoman(hours, minutes)
     if (isNaN(hours) || isNaN(minutes))
     {
         console.error("Ошибка! Введено не числовое значение!\r\n");
-        return tmpString;
+        return undefined;
     }
     /*Проверка на диапазон значений.*/
     if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59)
     {
         console.error("Ошибка! Введены неверные значения!\r\n");
-        return tmpString;
+        return undefined;
     }
 
     /*Перевод времени в римские цифры.*/
