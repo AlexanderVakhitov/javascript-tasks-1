@@ -108,14 +108,24 @@ function fromArabicToRoman(hours, minutes)
     /* Проверка на числовое значение. */
     if (isNaN(hours) || isNaN(minutes))
     {
+<<<<<<< HEAD
         console.error('Ошибка! Введено не числовое значение!');
         return;
+=======
+        console.error("Ошибка! Введено не числовое значение!\r\n");
+        return undefined;
+>>>>>>> 80ca5dc233de7b3edb69e1bdf486b4362d3dfc50
     }
     /* Проверка на диапазон значений. */
     if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59)
     {
+<<<<<<< HEAD
         console.error('Ошибка! Введены неверные значения!');
         return;
+=======
+        console.error("Ошибка! Введены неверные значения!\r\n");
+        return undefined;
+>>>>>>> 80ca5dc233de7b3edb69e1bdf486b4362d3dfc50
     }
 
     /* Перевод времени в римские цифры. */
@@ -166,5 +176,10 @@ function integerToRoman(number)
         }
     }
 
+<<<<<<< HEAD
     return result;
 }
+=======
+    return tmp;
+}
+>>>>>>> 80ca5dc233de7b3edb69e1bdf486b4362d3dfc50
