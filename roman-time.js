@@ -3,7 +3,7 @@
 var hours = process.argv[2];
 var minutes = process.argv[3];
 
-var string = "";
+var string = '';
 var arabicNumbers = [0, 1, 4, 5, 9, 10, 40, 50];
 var romanNumbers = [
     ['          ',
@@ -78,75 +78,65 @@ var romanNumbers = [
      ' ++++++++ '
     ]
 ];
-var serviceSymbols = [
-    ['          ',
-     '     ++   ',
-     '     ++   ',
-     '          ',
-     '          ',
-     '     ++   ',
-     '     ++   ',
-     '          '
-    ]
+var separator = [
+    '          ',
+    '     ++   ',
+    '     ++   ',
+    '          ',
+    '          ',
+    '     ++   ',
+    '     ++   ',
+    '          '
 ];
 
-if (string = fromArabicToRoman(hours, minutes))
+string = fromArabicToRoman(hours, minutes);
+if (string)
 {
-    console.log("Ваше время:\n\r");
+    console.log('Ваше время:');
     console.log(string);
 }
 else
 {
-    console.log('Ошибка! Неверно введенные данные!\r\n');
+    console.log('Ошибка! Неверно введенные данные!');
 }
 
 function fromArabicToRoman(hours, minutes)
 {
-    var tmpString = "";
     hours = parseInt(hours, 10);
     minutes = parseInt(minutes, 10);
 
-    /*Проверка на числовое значение.*/
+    /* Проверка на числовое значение. */
     if (isNaN(hours) || isNaN(minutes))
     {
-        console.error("Ошибка! Введено не числовое значение!\r\n");
-        return tmpString;
+        console.error('Ошибка! Введено не числовое значение!');
+        return;
     }
-    /*Проверка на диапазон значений.*/
+    /* Проверка на диапазон значений. */
     if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59)
     {
-        console.error("Ошибка! Введены неверные значения!\r\n");
-        return tmpString;
+        console.error('Ошибка! Введены неверные значения!');
+        return;
     }
 
-    /*Перевод времени в римские цифры.*/
-    var result = [];
-    result.push(integerToRoman(hours));
-    result.push([serviceSymbols[0]]);
-    result.push(integerToRoman(minutes));
+    /* Перевод времени в римские цифры. */
+    var result = integerToRoman(hours);
+    result = result.concat([separator], integerToRoman(minutes));
 
     return makeString(result);
 }
 
 function makeString(array)
 {
-    var string = "";
-    var tmp = [];
+    var string = '';
 
-    /*Сбрасываем все элементы в один массив.*/
-    for (var i=0; i<array.length; ++i)
-        for (var j=0; j<array[i].length; ++j)
-        {
-            tmp.push(array[i][j]);
-        }
-    /*Преобразуем в строку для вывода в консоль.*/
-    for (var i=0; i<tmp[0].length; ++i)
+    /* Преобразуем в строку для вывода в консоль. */
+    for (var i=0; i<array[0].length; ++i)
     {
-        for (var j=0; j<tmp.length; ++j)
+        for (var j=0; j<array.length; ++j)
         {
-            string += tmp[j][i];
+            string += array[j][i];
         }
-        string += "\r\n";
+        string += '\r\n';
     }
 
     return string;
@@ -154,14 +144,14 @@ function makeString(array)
 
 function integerToRoman(number)
 {
-    var tmp = [];
+    var result = [];
 
-    /*Обработка нуля.*/
-    if (number == 0)
+    /* Обработка нуля. */
+    if (number === 0)
     {
-        tmp.push(romanNumbers[0]);
+        result.push(romanNumbers[0]);
     }
-    /*Обработка остальных значений.*/
+    /* Обработка остальных значений. */
     else
     {
         var index = arabicNumbers.length;
@@ -170,11 +160,11 @@ function integerToRoman(number)
             while(number >= arabicNumbers[index])
             {
                 number -= arabicNumbers[index];
-                tmp.push(romanNumbers[index]);
+                result.push(romanNumbers[index]);
             }
             --index;
         }
     }
 
-    return tmp;
+    return result;
 }
